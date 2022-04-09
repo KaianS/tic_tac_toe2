@@ -41,7 +41,6 @@ String convertStatusToString(int position){
 void changeTurn(){
   var turn = isXtrue ? 'X' : 'O';
   print('Sua vez: $turn');
-  
 
   getInput();
   showBoard();
@@ -54,12 +53,12 @@ String getInput(){
 
   var inputNumber = int.tryParse(userInput.toString());
 
+  verifyTurn = verifyTurn == Status.cross ? Status.circle : Status.cross;
+
   if (inputNumber != null) {
     var updatedTile = verifyTurn == Status.circle ? Status.cross : Status.circle;
     board[inputNumber] = updatedTile;
   }
-
-  verifyTurn = verifyTurn == Status.cross ? Status.circle : Status.cross;
 
 
   return userInput;
