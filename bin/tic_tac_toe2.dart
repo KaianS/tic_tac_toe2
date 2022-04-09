@@ -1,8 +1,11 @@
 import 'dart:io';
 
 enum Status {none, circle, cross}
+
 bool isXtrue = true;
 bool isWon = false;
+
+Status verifyTurn = Status.cross;
 
 List<Status> board = [
   Status.none,
@@ -18,6 +21,7 @@ List<Status> board = [
 
 void main(List<String> arguments){
   showBoard();
+  changeTurn();
   getInput();
 }
 
@@ -30,23 +34,39 @@ String convertStatusToString(int position){
     case Status.cross:
       return 'X';
   }
+
+  return null;
+}
+
+void changeTurn(){
+  var turn = isXtrue ? 'X' : 'O';
+  print('Sua vez: $turn');
+  
+
+  getInput();
+  showBoard();
+  changeTurn();
 }
 
 String getInput(){
-  var turn = isXtrue ? 'X' : 'O';
-
-  print('Sua vez: $turn');
-
   var userInput = stdin.readLineSync();
+  //print('$userInput');
 
-  print('$userInput');
+  var inputNumber = int.tryParse(userInput.toString());
+
+  if (inputNumber != null) {
+    var updatedTile = verifyTurn == Status.circle ? Status.cross : Status.circle;
+    board[inputNumber] = updatedTile;
+  }
+
+  verifyTurn = verifyTurn == Status.cross ? Status.circle : Status.cross;
+
 
   return userInput;
 }
 
 void checkInputDisponibility(){
   
-
 }
 
 void updateBoardPlayer(){
@@ -54,10 +74,6 @@ void updateBoardPlayer(){
 }
 
 void verifyIfPlayerWon(){
-
-}
-
-void changeTurn(){
 
 }
 
