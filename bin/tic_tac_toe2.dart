@@ -2,7 +2,7 @@ import 'dart:io';
 
 enum Status {none, circle, cross}
 
-bool isXtrue = true;
+int playerTime = 1;
 bool isWon = false;
 
 Status verifyTurn = Status.cross;
@@ -39,8 +39,13 @@ String convertStatusToString(int position){
 }
 
 void changeTurn(){
-  var turn = isXtrue ? 'X' : 'O';
-  print('Sua vez: $turn');
+  playerTime++;
+
+  if(playerTime % 2 == 0){
+    print('Jogador X, escolha um espaço.');
+  } else if(playerTime % 2 == 1) {
+    print('Jogador O, escolha um espaço.');
+  }
 
   getInput();
   showBoard();
